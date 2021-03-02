@@ -10,9 +10,9 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
     "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "target": "es2019",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2016.Array.Include"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

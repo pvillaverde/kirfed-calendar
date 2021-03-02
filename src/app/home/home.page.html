@@ -1,20 +1,97 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-title> Calendario de directos de ClanKirfed </ion-title>
+		<ion-button color="secondary" slot="end" (click)="preview()"> <ion-icon name="camera"></ion-icon> Preview </ion-button>
+		<ion-button color="secondary" slot="end" (click)="downloadPng()"> <ion-icon name="download"></ion-icon> PNG </ion-button>
+		<ion-button color="secondary" slot="end" (click)="downloadSvg()"> <ion-icon name="download"></ion-icon> SVG </ion-button>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<ion-row>
+		<ion-col size="7">
+			<ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+				<ion-card *ngFor="let item of calendario">
+					<ion-card-content>
+						<ion-row class="ion-align-items-stretch ion-justify-content-center">
+							<ion-col size="2">
+								<ion-item>
+									<ion-label position="stacked">Día e Hora</ion-label>
+									<ion-textarea [(ngModel)]="item.datetime"></ion-textarea>
+								</ion-item>
+							</ion-col>
+							<ion-col size="3">
+								<ion-item>
+									<ion-label position="stacked">Xogo</ion-label>
+									<ion-textarea [(ngModel)]="item.xogo"></ion-textarea>
+								</ion-item>
+							</ion-col>
+							<ion-col size="3">
+								<ion-item>
+									<ion-label position="stacked">Host (Quén emite?)</ion-label>
+									<ion-select [(ngModel)]="item.host" cancelText="Cancelar" okText="Aceptar!">
+										<ion-select-option value="">Non especificar</ion-select-option>
+										<ion-select-option *ngFor="let p of persoas" [value]="p"
+											>{{p}}</ion-select-option
+										>
+									</ion-select>
+								</ion-item>
+							</ion-col>
+							<ion-col size="3">
+								<ion-item>
+									<ion-label position="stacked">Persoas</ion-label>
+									<ion-select
+										multiple="true"
+										[(ngModel)]="item.persoas"
+										cancelText="Cancelar"
+										okText="Aceptar!"
+									>
+										<ion-select-option *ngFor="let p of persoas" [value]="p"
+											>{{p}}</ion-select-option
+										>
+									</ion-select>
+								</ion-item>
+							</ion-col>
+							<ion-col size="1">
+								<ion-button size="full" color="secondary" title="Reordear">
+									<ion-reorder>
+										<ion-icon name="reorder-two"></ion-icon>
+									</ion-reorder>
+								</ion-button>
+								<ion-button size="full" color="danger" (click)="remove(item)">
+									<ion-icon name="trash"></ion-icon>
+								</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-card-content>
+				</ion-card>
+			</ion-reorder-group>
+			<ion-button size="full" color="success" (click)="add()"> <ion-icon name="add"></ion-icon> Engadir </ion-button>
+		</ion-col>
+		<ion-col size="5">
+			<article id="k-programacion">
+				<header class="k-title">PROGRAMACIÓN</header>
+				<section class="k-item" *ngFor="let item of calendario">
+					<div class="k-datetime">{{item.datetime}}</div>
+					<div class="k-separador"></div>
+					<div class="k-xogo">{{item.xogo}}</div>
+					<aside class="k-host" *ngIf="item.host">
+						<img [src]="'assets/img/'+item.host+'.png'" />
+						<a href="https://twitch.tv/{{item.host}}" target="_blank">twitch.tv/{{item.host}}</a>
+					</aside>
+					<div class="k-avatars">
+						<img *ngFor="let persoa of item.persoas" [src]="'assets/img/'+persoa+'.png'" />
+					</div>
+				</section>
+				<footer class="k-footer">
+					<ion-icon name="logo-twitch"></ion-icon>
+					<ion-icon name="logo-instagram"></ion-icon>
+					<ion-icon name="logo-twitter"></ion-icon>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+					@ClanKirfed
+				</footer>
+			</article>
+		</ion-col>
+	</ion-row>
+	<div id="preview"></div>
 </ion-content>
