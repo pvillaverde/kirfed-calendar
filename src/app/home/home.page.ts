@@ -12,7 +12,25 @@ import { Storage } from '@ionic/storage';
 	styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-	persoas = ['anahanabi', 'adrancinho', 'inowol', 'mosynho', 'galician_gamer', 'fedello', 'kirtash', 'clankirfed'];
+	persoas = [
+		'anahanabi',
+		'agosreigosa',
+		'brais_camposino',
+		'armesto3d',
+		'adrancinho',
+		'inowol',
+		'mosynho',
+		'galician_gamer',
+		'lobeira',
+		'farun',
+		'sorpresa',
+		'lgtb',
+		'twitch_en_galego',
+
+		'fedello',
+		'kirtash',
+		'clankirfed',
+	];
 	calendario = [
 		{
 			datetime: 'Sábado 20\n11:30',
